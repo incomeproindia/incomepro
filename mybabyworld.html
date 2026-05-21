@@ -221,6 +221,86 @@
   .cp-status.ok{background:var(--gd);color:var(--green);border:1px solid var(--gb);display:block}
   .cp-status.err{background:rgba(255,79,109,.1);color:var(--red);border:1px solid rgba(255,79,109,.25);display:block}
 
+  /* ── SPONSOR MANAGEMENT ── */
+  .spn-create-card{
+    background:var(--s3);border:1px solid rgba(79,163,255,.2);
+    border-radius:var(--r);padding:20px 18px;margin-bottom:22px;position:relative;overflow:hidden;
+  }
+  .spn-create-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1.5px;
+    background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  }
+  .spn-create-title{font-size:.9rem;font-weight:800;color:var(--blue);
+    margin-bottom:5px;display:flex;align-items:center;gap:7px}
+  .spn-create-hint{font-size:.73rem;color:var(--t3);font-family:var(--fh);
+    margin-bottom:16px;line-height:1.6}
+  .spn-form-row{display:flex;gap:10px;flex-wrap:wrap}
+  .spn-form-row .cp-inp{flex:1;min-width:140px}
+  .spn-tcard{background:var(--s3);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+  .spn-tcard-hdr{
+    padding:16px 20px;border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+  .spn-tcard-title{font-size:.9rem;font-weight:700}
+  .spn-list{padding:4px 0}
+  .spn-row{
+    display:grid;grid-template-columns:1.6fr 1.2fr 1.5fr .9fr auto;
+    align-items:center;gap:14px;
+    padding:13px 20px;border-bottom:1px solid rgba(255,255,255,.03);
+    transition:background .15s;
+  }
+  .spn-row:last-child{border-bottom:none}
+  .spn-row:hover{background:rgba(255,255,255,.025)}
+  .spn-name{font-weight:700;font-size:.86rem}
+  .spn-phone{font-size:.8rem;color:var(--t2);font-variant-numeric:tabular-nums}
+  .spn-ref-badge{
+    display:inline-flex;align-items:center;gap:5px;
+    padding:3px 9px;border-radius:50px;
+    background:rgba(79,163,255,.1);border:1px solid rgba(79,163,255,.2);
+    color:var(--blue);font-size:.72rem;font-weight:700;font-family:monospace;letter-spacing:.3px;
+  }
+  .spn-count{
+    font-size:.95rem;font-weight:900;color:var(--green);
+    text-align:center;
+  }
+  .spn-count-lbl{font-size:.58rem;color:var(--t3);text-align:center;font-family:var(--fh)}
+  .spn-actions{display:flex;gap:6px;flex-wrap:wrap}
+  .spn-empty{padding:50px 24px;text-align:center;color:var(--t3);font-family:var(--fh);font-size:.88rem}
+  .spn-header-row{
+    display:grid;grid-template-columns:1.6fr 1.2fr 1.5fr .9fr auto;
+    gap:14px;padding:9px 20px;
+    background:rgba(255,255,255,.025);border-bottom:1px solid var(--border);
+  }
+  .spn-hcell{font-size:.63rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.8px}
+  /* Sponsor leads modal */
+  .spn-modal-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;
+    display:flex;align-items:center;justify-content:center;padding:20px;
+    backdrop-filter:blur(4px);
+  }
+  .spn-modal{
+    background:var(--s1);border:1px solid var(--border);border-radius:var(--r);
+    width:100%;max-width:780px;max-height:82vh;display:flex;flex-direction:column;
+    box-shadow:0 24px 80px rgba(0,0,0,.7);
+  }
+  .spn-modal-hdr{
+    padding:16px 20px;border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+  }
+  .spn-modal-title{font-size:.95rem;font-weight:800}
+  .spn-modal-close{
+    width:30px;height:30px;border-radius:8px;background:var(--s4);border:1px solid var(--border);
+    color:var(--t2);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;
+    transition:all .2s;
+  }
+  .spn-modal-close:hover{background:rgba(255,79,109,.15);color:var(--red);border-color:rgba(255,79,109,.3)}
+  .spn-modal-body{overflow-y:auto;flex:1;padding:16px 20px}
+  @media(max-width:700px){
+    .spn-row,.spn-header-row{grid-template-columns:1fr 1fr;gap:8px}
+    .spn-hcell:nth-child(3),.spn-hcell:nth-child(4),.spn-hcell:nth-child(5),
+    .spn-ref-badge,.spn-count,.spn-count-lbl{display:none}
+  }
+
   /* TOAST */
   .toast-area{
     position:fixed;bottom:18px;right:18px;z-index:500;
@@ -247,7 +327,7 @@
   }
   @media(max-width:520px){
     .stats-grid{grid-template-columns:1fr 1fr}
-    th:nth-child(5),td:nth-child(5){display:none}
+    th:nth-child(5),td:nth-child(5),th:nth-child(7),td:nth-child(7){display:none}
   }
   </style>
 </head>
@@ -280,6 +360,9 @@
     </button>
 
     <div class="sb-sec">Tools</div>
+    <button class="nav-btn" id="nav-sponsors" onclick="showPanel('sponsors')">
+      <span class="ni">🤝</span> Sponsors
+    </button>
     <button class="nav-btn" onclick="exportCSV()">
       <span class="ni">📥</span> Export CSV
     </button>
@@ -417,15 +500,65 @@
         </div>
       </div><!-- /panel-settings -->
 
+      <!-- ═════ PANEL: SPONSORS ═════ -->
+      <div class="panel" id="panel-sponsors">
+
+        <!-- Create Sponsor Card -->
+        <div class="spn-create-card">
+          <div class="spn-create-title">🤝 Create New Sponsor</div>
+          <p class="spn-create-hint">
+            Sponsor बनाएं और उनका referral link automatically generate होगा।<br>
+            Referral link से आने वाले सभी leads उस sponsor के नाम पर count होंगे।
+          </p>
+          <div class="spn-form-row">
+            <input class="cp-inp" id="spn-inp-name" placeholder="Sponsor Name (e.g. Rahul Sharma)" maxlength="60" />
+            <input class="cp-inp" id="spn-inp-mobile" placeholder="Mobile Number (10 digits)" maxlength="10" inputmode="numeric" />
+            <button class="btn btn-solid" onclick="createSponsor()">➕ Create Sponsor</button>
+          </div>
+          <div class="cp-status" id="spn-create-status"></div>
+        </div>
+
+        <!-- Sponsor List -->
+        <div class="spn-tcard">
+          <div class="spn-tcard-hdr">
+            <div class="spn-tcard-title">📋 Sponsor List</div>
+            <button class="btn btn-ghost" onclick="loadSponsors()">🔄 Refresh</button>
+          </div>
+          <div class="spn-header-row">
+            <div class="spn-hcell">Sponsor Name</div>
+            <div class="spn-hcell">Mobile</div>
+            <div class="spn-hcell">Referral Code</div>
+            <div class="spn-hcell">Leads</div>
+            <div class="spn-hcell">Actions</div>
+          </div>
+          <div id="spn-list-body">
+            <div class="spn-empty">
+              <div class="spinner"></div>
+              <p>Sponsors load हो रहे हैं...</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /panel-sponsors -->
+
     </div><!-- /content -->
   </div><!-- /main -->
 </div><!-- /layout -->
 
-<div class="toast-area" id="toast-area"></div>
+      <!-- ═════ SPONSOR LEADS MODAL ═════ -->
+      <div class="spn-modal-overlay" id="spn-modal" style="display:none" onclick="closeLeadsModal(event)">
+        <div class="spn-modal">
+          <div class="spn-modal-hdr">
+            <div class="spn-modal-title" id="spn-modal-title">📊 Sponsor Leads</div>
+            <button class="spn-modal-close" onclick="closeLeadsModal()">✕</button>
+          </div>
+          <div class="spn-modal-body" id="spn-modal-body">
+            <div class="tbl-loading"><div class="spinner"></div><p>Loading...</p></div>
+          </div>
+        </div>
+      </div>
 
-<!-- ═══════════════════════════════════════════
-     DASHBOARD SCRIPT
-═══════════════════════════════════════════ -->
+<div class="toast-area" id="toast-area"></div>
 <script>
 'use strict';
 
@@ -439,6 +572,8 @@ const DB = {
   page:       1,
   pageSize:   25,
   today:      new Date().toLocaleDateString('en-IN'),
+  sponsors:      [],
+  leadCountMap:  {},
 };
 
 /* ── INIT ── */
@@ -451,6 +586,7 @@ window.addEventListener('DOMContentLoaded', () => {
     connectSupabase(DB.url, DB.key);
     loadAll();
     loadSettings();
+    loadSponsors();
     document.getElementById('setup-card').style.opacity = '.4';
   }
 
@@ -484,6 +620,7 @@ function saveSupabaseConfig() {
     document.getElementById('setup-card').style.opacity = '.4';
     loadAll();
     loadSettings();
+    loadSponsors();
   }
 }
 
@@ -500,8 +637,9 @@ function showPanel(id) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-' + id).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  const titles = { leads:'📋 Lead Dashboard', settings:'⚙️ Admin Settings' };
+  const titles = { leads:'📋 Lead Dashboard', settings:'⚙️ Admin Settings', sponsors:'🤝 Sponsor Management' };
   document.getElementById('tb-title').textContent = titles[id] || '📋 Dashboard';
+  if (id === 'sponsors' && DB.sb) loadSponsors();
 }
 
 /* ── LOAD ALL LEADS ── */
@@ -511,7 +649,7 @@ async function loadAll() {
   try {
     const { data, error } = await DB.sb
       .from('leads')
-      .select('id,name,phone,city,created_at')
+      .select('id,name,phone,city,sponsor_ref,created_at')
       .order('created_at', { ascending: false });
 
     if (error) throw error;
@@ -602,6 +740,7 @@ function renderTable() {
       <td class="td-name">${esc(l.name)}</td>
       <td class="td-phone">${esc(l.phone)}</td>
       <td><span class="city-chip">${esc(l.city)}</span></td>
+      <td style="color:var(--blue);font-size:.76rem;font-weight:600">${l.sponsor_ref ? esc(l.sponsor_ref) : '<span style="color:var(--t3)">—</span>'}</td>
       <td><span class="${l.dateStr===todayStr?'b-today':'b-old'}">${esc(l.dateStr)}</span></td>
       <td style="color:var(--t3);font-size:.76rem">${esc(l.timeStr)}</td>
     </tr>`).join('');
@@ -609,7 +748,7 @@ function renderTable() {
   document.getElementById('tbl-body').innerHTML = `
     <table>
       <thead><tr>
-        <th>#</th><th>नाम</th><th>मोबाइल</th><th>शहर</th><th>तारीख</th><th>समय</th>
+        <th>#</th><th>नाम</th><th>मोबाइल</th><th>शहर</th><th>Sponsor Ref</th><th>तारीख</th><th>समय</th>
       </tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
@@ -640,12 +779,13 @@ function showLoading() {
 /* ── CSV EXPORT ── */
 function exportCSV() {
   if (!DB.allLeads.length) { toast('⚠️ कोई data नहीं', 'err'); return; }
-  const headers = ['#','Name','Mobile','City','Date','Time'];
+  const headers = ['#','Name','Mobile','City','Sponsor Ref','Date','Time'];
   const rows = DB.allLeads.map((l,i) => [
     i+1,
     `"${(l.name||'').replace(/"/g,'""')}"`,
     `"${(l.phone||'').replace(/"/g,'""')}"`,
     `"${(l.city||'').replace(/"/g,'""')}"`,
+    `"${(l.sponsor_ref||'').replace(/"/g,'""')}"`,
     `"${(l.dateStr||'').replace(/"/g,'""')}"`,
     `"${(l.timeStr||'').replace(/"/g,'""')}"`,
   ].join(','));
@@ -694,6 +834,216 @@ function previewPoster(url) {
   img.onload  = () => { img.style.display='block'; if(ph) ph.style.display='none'; };
   img.onerror = () => { img.style.display='none';  if(ph) ph.style.display='block'; };
   img.src = url;
+}
+
+/* ══════════════════════════════════════
+   SPONSOR MANAGEMENT FUNCTIONS
+══════════════════════════════════════ */
+
+/* Generate referral code from name + 3-digit random number */
+function generateReferralCode(name) {
+  const clean = name.toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9]/g,'');
+  const rand = Math.floor(100 + Math.random() * 900); // 100–999
+  return clean + rand;
+}
+
+/* ── CREATE SPONSOR ── */
+async function createSponsor() {
+  if (!DB.sb) { toast('❌ Supabase connected नहीं है', 'err'); return; }
+
+  const name   = (document.getElementById('spn-inp-name')?.value || '').trim();
+  const mobile = (document.getElementById('spn-inp-mobile')?.value || '').trim();
+
+  if (!name)             { showStatus('spn-create-status','⚠️ Sponsor Name डालें', false); return; }
+  if (!/^\d{10}$/.test(mobile)) { showStatus('spn-create-status','⚠️ 10 अंकों का Mobile Number डालें', false); return; }
+
+  const referral_code = generateReferralCode(name);
+  showStatus('spn-create-status','⏳ Creating sponsor...', null);
+
+  try {
+    const { error } = await DB.sb.from('sponsors').insert({
+      sponsor_name:  name,
+      mobile:        mobile,
+      referral_code: referral_code,
+      created_at:    new Date().toISOString(),
+    });
+    if (error) throw error;
+
+    document.getElementById('spn-inp-name').value   = '';
+    document.getElementById('spn-inp-mobile').value = '';
+
+    const link = `https://website.com/?ref=${referral_code}`;
+    showStatus('spn-create-status',`✅ Sponsor created! Code: ${referral_code} — Link: ${link}`, true);
+    toast(`✅ ${name} sponsor बन गया! Code: ${referral_code}`, 'ok');
+    loadSponsors();
+  } catch(e) {
+    showStatus('spn-create-status','❌ Error: ' + e.message, false);
+  }
+}
+
+/* ── LOAD SPONSORS ── */
+async function loadSponsors() {
+  if (!DB.sb) return;
+  const body = document.getElementById('spn-list-body');
+  if (body) body.innerHTML = '<div class="spn-empty"><div class="spinner"></div><p>Loading sponsors...</p></div>';
+
+  try {
+    // Fetch sponsors
+    const { data: sponsors, error: spErr } = await DB.sb
+      .from('sponsors')
+      .select('id,sponsor_name,mobile,referral_code,created_at')
+      .order('created_at', { ascending: false });
+    if (spErr) throw spErr;
+
+    // Fetch lead counts per sponsor_ref
+    const { data: leads, error: lErr } = await DB.sb
+      .from('leads')
+      .select('sponsor_ref');
+    if (lErr) throw lErr;
+
+    // Build count map
+    const countMap = {};
+    (leads || []).forEach(l => {
+      if (l.sponsor_ref) countMap[l.sponsor_ref] = (countMap[l.sponsor_ref] || 0) + 1;
+    });
+
+    DB.sponsors = sponsors || [];
+    DB.leadCountMap = countMap;
+    renderSponsors();
+  } catch(e) {
+    if (body) body.innerHTML = `<div class="spn-empty">❌ Load failed: ${esc(e.message)}</div>`;
+  }
+}
+
+/* ── RENDER SPONSOR LIST ── */
+function renderSponsors() {
+  const body = document.getElementById('spn-list-body');
+  if (!body) return;
+  const list = DB.sponsors || [];
+
+  if (!list.length) {
+    body.innerHTML = '<div class="spn-empty">🤝 अभी कोई Sponsor नहीं है। ऊपर से बनाएं।</div>';
+    return;
+  }
+
+  const rows = list.map(s => {
+    const code  = esc(s.referral_code);
+    const link  = `https://website.com/?ref=${code}`;
+    const count = DB.leadCountMap?.[s.referral_code] || 0;
+    return `
+      <div class="spn-row">
+        <div>
+          <div class="spn-name">${esc(s.sponsor_name)}</div>
+          <div style="font-size:.65rem;color:var(--t3);margin-top:2px">${new Date(s.created_at).toLocaleDateString('en-IN')}</div>
+        </div>
+        <div class="spn-phone">${esc(s.mobile)}</div>
+        <div><span class="spn-ref-badge">🔗 ${code}</span></div>
+        <div>
+          <div class="spn-count">${count}</div>
+          <div class="spn-count-lbl">Leads</div>
+        </div>
+        <div class="spn-actions">
+          <button class="btn btn-ghost" style="padding:6px 11px;font-size:.7rem" onclick="copyRefLink('${code}','${esc(s.sponsor_name)}')">📋 Copy</button>
+          <button class="btn btn-solid" style="padding:6px 11px;font-size:.7rem" onclick="viewSponsorLeads('${code}','${esc(s.sponsor_name)}')">👁 Leads</button>
+          <button class="btn btn-red"   style="padding:6px 11px;font-size:.7rem" onclick="deleteSponsor('${esc(s.id)}','${esc(s.sponsor_name)}')">🗑</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  body.innerHTML = rows;
+}
+
+/* ── COPY REFERRAL LINK ── */
+function copyRefLink(code, name) {
+  const link = `https://website.com/?ref=${code}`;
+  navigator.clipboard.writeText(link).then(() => {
+    toast(`📋 Link copied! ${name} — ${code}`, 'ok');
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = link; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    toast(`📋 Link copied! ${code}`, 'ok');
+  });
+}
+
+/* ── VIEW SPONSOR LEADS MODAL ── */
+async function viewSponsorLeads(code, name) {
+  const modal = document.getElementById('spn-modal');
+  const title = document.getElementById('spn-modal-title');
+  const mbody = document.getElementById('spn-modal-body');
+  if (!modal) return;
+
+  title.textContent = `📊 ${name} — Leads (ref: ${code})`;
+  mbody.innerHTML = '<div class="tbl-loading"><div class="spinner"></div><p>Loading leads...</p></div>';
+  modal.style.display = 'flex';
+
+  try {
+    const { data, error } = await DB.sb
+      .from('leads')
+      .select('name,phone,city,created_at')
+      .eq('sponsor_ref', code)
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+
+    const leads = data || [];
+    if (!leads.length) {
+      mbody.innerHTML = `<div style="padding:40px;text-align:center;color:var(--t3);font-family:var(--fh)">😕 ${esc(name)} के लिए कोई lead नहीं मिली।</div>`;
+      return;
+    }
+
+    const rows = leads.map((l, i) => {
+      const d = new Date(l.created_at);
+      const dateStr = d.toLocaleDateString('en-IN');
+      const timeStr = d.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit', hour12:true });
+      return `<tr>
+        <td style="color:var(--t3);font-size:.7rem">${i+1}</td>
+        <td class="td-name">${esc(l.name)}</td>
+        <td class="td-phone">${esc(l.phone)}</td>
+        <td><span class="city-chip">${esc(l.city)}</span></td>
+        <td><span class="b-today" style="font-size:.68rem">${dateStr}</span></td>
+        <td style="color:var(--t3);font-size:.76rem">${timeStr}</td>
+      </tr>`;
+    }).join('');
+
+    mbody.innerHTML = `
+      <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-size:.82rem;color:var(--t2)">Total Leads:</span>
+        <span style="font-size:1.4rem;font-weight:900;color:var(--green)">${leads.length}</span>
+        <span style="font-size:.72rem;color:var(--t3);font-family:var(--fh)">Sponsor Ref: <b style="color:var(--blue)">${esc(code)}</b></span>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>#</th><th>नाम</th><th>मोबाइल</th><th>शहर</th><th>तारीख</th><th>समय</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+  } catch(e) {
+    mbody.innerHTML = `<div style="padding:30px;text-align:center;color:var(--red)">❌ Error: ${esc(e.message)}</div>`;
+  }
+}
+
+/* ── CLOSE MODAL ── */
+function closeLeadsModal(e) {
+  if (!e || e.target === document.getElementById('spn-modal')) {
+    document.getElementById('spn-modal').style.display = 'none';
+  }
+}
+
+/* ── DELETE SPONSOR ── */
+async function deleteSponsor(id, name) {
+  if (!confirm(`"${name}" को delete करें? उनके leads का data safe रहेगा।`)) return;
+  if (!DB.sb) return;
+  try {
+    const { error } = await DB.sb.from('sponsors').delete().eq('id', id);
+    if (error) throw error;
+    toast(`🗑 ${name} deleted`, 'ok');
+    loadSponsors();
+  } catch(e) {
+    toast('❌ Delete failed: ' + e.message, 'err');
+  }
 }
 
 /* ── HELPERS ── */
