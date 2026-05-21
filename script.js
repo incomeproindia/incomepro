@@ -19,7 +19,7 @@
 ════════════════════════════════════════════════════════ */
 const CFG = {
   // ─── SUPABASE (replace with your real values) ───────────────
-  SUPABASE_URL:      'https://saourrffomhpjdtqbrgg.supabase.co/rest/v1/',
+  SUPABASE_URL:      'https://saourrffomhpjdtqbrgg.supabase.co',
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhb3VycmZmb21ocGpkdHFicmdnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzNzc1NzYsImV4cCI6MjA5NDk1MzU3Nn0.9cPX2ruFaibL4_0PVeTgFcenBV9tny40R-I0FEiCvI4',
   // ─── WHATSAPP — DO NOT MODIFY ────────────────────────────────
   WHATSAPP_NUMBER: '918318873808',
