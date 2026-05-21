@@ -928,7 +928,7 @@ function renderSponsors() {
 
   const rows = list.map(s => {
     const code  = esc(s.referral_code);
-    const link  = `https://website.com/?ref=${code}`;
+    const link = `https://incomeproindia.github.io/incomepro/index.html?ref=${code}`;
     const count = DB.leadCountMap?.[s.referral_code] || 0;
     return `
       <div class="spn-row">
@@ -955,7 +955,7 @@ function renderSponsors() {
 
 /* ── COPY REFERRAL LINK ── */
 function copyRefLink(code, name) {
-  const link = `https://website.com/?ref=${code}`;
+  const link = `https://incomeproindia.github.io/incomepro/index.html?ref=${code}`;
   navigator.clipboard.writeText(link).then(() => {
     toast(`📋 Link copied! ${name} — ${code}`, 'ok');
   }).catch(() => {
