@@ -77,9 +77,27 @@ const state = {
 const $ = id => document.getElementById(id);
 
 /* ════════════════════════════════════════════════════════
+   ④-A SPONSOR REFERRAL TRACKING
+   Reads ?ref= from URL → saves to localStorage
+   getSponsorRef() is used during form submit & WhatsApp msg
+════════════════════════════════════════════════════════ */
+function captureReferralCode() {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get('ref');
+  if (ref && ref.trim()) {
+    localStorage.setItem('sponsor_ref', ref.trim());
+  }
+}
+
+function getSponsorRef() {
+  return localStorage.getItem('sponsor_ref') || '';
+}
+
+/* ════════════════════════════════════════════════════════
    ⑤ INIT
 ════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', async () => {
+  captureReferralCode(); // ← capture ?ref= from URL on every page load
   state.supabaseReady = initSupabase();
 
   // Load settings + real count from Supabase in parallel
@@ -247,6 +265,7 @@ async function handleSubmit(e) {
         name:  name,
         phone: mobile,
         city:  city,
+        sponsor_ref: getSponsorRef(),
         // created_at is auto-set by Supabase (DEFAULT NOW())
       });
 
@@ -298,8 +317,10 @@ function onSubmitSuccess(name, mobile, city) {
   animateSeatsFill();
 
   // ── WhatsApp URL — ORIGINAL FORMAT PRESERVED ──────────────
+  const sponsorRef = getSponsorRef();
   const waMsg = encodeURIComponent(
-    `नमस्ते, मैंने ऑनलाइन साइड इनकम के लिए रजिस्ट्रेशन किया है।\nनाम: ${name}\nमोबाइल: ${mobile}\nशहर: ${city}`
+    `नमस्ते, मैंने ऑनलाइन साइड इनकम के लिए रजिस्ट्रेशन किया है।\nनाम: ${name}\nमोबाइल: ${mobile}\nशहर: ${city}` +
+    (sponsorRef ? `\nSponsor Ref: ${sponsorRef}` : '')
   );
   const waUrl = `https://wa.me/${CFG.WHATSAPP_NUMBER}?text=${waMsg}`;
   const waBtn = $('wa-btn');
