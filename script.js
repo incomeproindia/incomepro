@@ -22,7 +22,7 @@ const CFG = {
   SUPABASE_URL:      'https://saourrffomhpjdtqbrgg.supabase.co',
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhb3VycmZmb21ocGpkdHFicmdnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzNzc1NzYsImV4cCI6MjA5NDk1MzU3Nn0.9cPX2ruFaibL4_0PVeTgFcenBV9tny40R-I0FEiCvI4',
   // ─── WHATSAPP — DO NOT MODIFY ────────────────────────────────
-  WHATSAPP_NUMBER: '918815837201',
+  WHATSAPP_NUMBER: '919238247223',
 
   // ─── DEFAULTS (used while Supabase loads or on error) ────────
   DEFAULT_COUNTDOWN:  (() => { const d = new Date(); d.setHours(23,59,59,0); return d.toISOString(); })(),
